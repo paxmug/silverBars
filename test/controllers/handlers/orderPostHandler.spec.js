@@ -1,9 +1,14 @@
 const request = require('supertest');
+const { resetDataBase } = require('../../helper');
+const orders = require('../../../db/orders');
 
 describe('POST /api/order', () => {
     let app;
     before(() => {
         app = require('../../../app');
+    });
+    after(() => {
+       resetDataBase();
     });
 
 
@@ -32,4 +37,19 @@ describe('POST /api/order', () => {
                 .expect(404)
         })
     });
+
+    describe('Valid request', () => {
+        it('returns correct data', () => {
+            return request(app)
+                .post('/api/order')
+                .send({
+                    'userId': 1,
+                    'quantity': 3.5,
+                    'pricePerKg': 303,
+                    'type': 'BUY'
+                    })
+                .set('Content-Type', 'application/json')
+                .expect(200)          
+        });
+    })
 })
