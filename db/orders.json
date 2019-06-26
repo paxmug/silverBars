@@ -1,1 +1,1 @@
-{"currency":"GBP","metric":"Kg","board":[]}
+{"currency":"GBP","metric":"Kg","board":[{"userId":1,"quantity":3.5,"pricePerKg":306,"type":"SELL"},{"userId":2,"quantity":1.2,"pricePerKg":310,"type":"SELL"},{"userId":3,"quantity":1.5,"pricePerKg":307,"type":"SELL"},{"userId":4,"quantity":2,"pricePerKg":306,"type":"SELL"},{"userId":5,"quantity":5,"pricePerKg":304,"type":"BUY"},{"userId":6,"quantity":8,"pricePerKg":304,"type":"BUY"},{"userId":7,"quantity":1.8,"pricePerKg":309,"type":"BUY"},{"userId":1,"quantity":3.5,"pricePerKg":303,"type":"BUY"}]}

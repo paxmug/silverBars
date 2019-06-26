@@ -1,16 +1,26 @@
 const request = require('supertest');
-const { resetDataBase } = require('../../helper');
-const orders = require('../../../db/orders');
+const mockery = require('mockery');
+
+const serviceMock = {
+    setData : () => {}
+};
 
 describe('POST /api/order', () => {
     let app;
     before(() => {
+        mockery.enable({
+            useCleanCache: true,
+            warnOnReplace: true,
+            warnOnUnregistered: false,
+        });
+        mockery.registerMock('../../../service/dataService', serviceMock);
         app = require('../../../app');
     });
     after(() => {
-       resetDataBase();
+        mockery.deregisterAll();
+        mockery.disable();
     });
-
+    
 
     describe('Invalid request', () => {
         it('returns 415 if no content-type header', () => {
@@ -30,7 +40,7 @@ describe('POST /api/order', () => {
                 .set('Content-Type', 'application/json')
                 .expect(400)
         })
-        it('returns 404 if different http method is called', () => {
+        it('returns 404 if non existing http method is called', () => {
             return request(app)
                 .get('/api/order')
                 .set('Content-Type', 'application/json')
